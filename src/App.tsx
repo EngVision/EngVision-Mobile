@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MMKV } from 'react-native-mmkv';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
 
 import { ThemeProvider } from '@/theme';
 
@@ -13,11 +15,13 @@ export const storage = new MMKV();
 
 function App() {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<ThemeProvider storage={storage}>
-				<ApplicationNavigator />
-			</ThemeProvider>
-		</QueryClientProvider>
+		<GluestackUIProvider config={config}>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider storage={storage}>
+					<ApplicationNavigator />
+				</ThemeProvider>
+			</QueryClientProvider>
+		</GluestackUIProvider>
 	);
 }
 

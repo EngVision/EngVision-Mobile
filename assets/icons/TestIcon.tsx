@@ -1,8 +1,7 @@
 import { createIcon } from '@gluestack-ui/themed';
 import React from 'react';
 import { Path, Rect } from 'react-native-svg';
-import { Icon } from '@gluestack-ui/themed';
-const GluestackSVG = createIcon({
+export const GluestackSVG = createIcon({
 	// createIcon function is imported from '@gluestack-ui/themed'
 	viewBox: '0 0 32 32',
 	path: (
@@ -28,6 +27,3 @@ const GluestackSVG = createIcon({
 		</>
 	),
 });
-export const GluestackIcon = () => {
-	return <Icon as={GluestackSVG} color="black" size="xl" />;
-};

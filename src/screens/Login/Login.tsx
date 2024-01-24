@@ -71,6 +71,7 @@ function Login({ navigation }) {
 			'public_profile',
 			'email',
 		]);
+		console.log('🚀 ~ onFacebookButtonPress ~ result:', result);
 
 		if (result.isCancelled) {
 			throw 'User cancelled the login process';

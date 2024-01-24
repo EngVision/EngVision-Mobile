@@ -1,47 +1,47 @@
 {
-  "project_info": {
-    "project_number": "956215831123",
-    "project_id": "engvisionmobile-b882a",
-    "storage_bucket": "engvisionmobile-b882a.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:956215831123:android:120012f7941975608274a6",
-        "android_client_info": {
-          "package_name": "com.engvisionmobile"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "956215831123-hhbqhl1871i37s4nggk899dp1gpr2ggi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.engvisionmobile",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "956215831123-jftdku8149v7q3l7af3138s0ievbr0oe.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAcEVTCdtidbMoYiRzhaLnK083War0F3Cg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "956215831123-jftdku8149v7q3l7af3138s0ievbr0oe.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+	"project_info": {
+		"project_number": "956215831123",
+		"project_id": "engvisionmobile-b882a",
+		"storage_bucket": "engvisionmobile-b882a.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:956215831123:android:120012f7941975608274a6",
+				"android_client_info": {
+					"package_name": "com.engvisionmobile"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "956215831123-hhbqhl1871i37s4nggk899dp1gpr2ggi.apps.googleusercontent.com",
+					"client_type": 1,
+					"android_info": {
+						"package_name": "com.engvisionmobile",
+						"certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+					}
+				},
+				{
+					"client_id": "956215831123-jftdku8149v7q3l7af3138s0ievbr0oe.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyAcEVTCdtidbMoYiRzhaLnK083War0F3Cg"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "956215831123-jftdku8149v7q3l7af3138s0ievbr0oe.apps.googleusercontent.com",
+							"client_type": 3
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
 }

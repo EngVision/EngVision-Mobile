@@ -113,6 +113,8 @@ dependencies {
     }
 
     implementation project(':react-native-fbsdk-next')
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+    implementation 'com.facebook.android:facebook-login:latest.release'
 
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
     if (hermesEnabled.toBoolean()) {

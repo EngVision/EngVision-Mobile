@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "815824389921",
+    "project_id": "engvision",
+    "storage_bucket": "engvision.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815824389921:android:e0c170655d96fe85516060",
+        "android_client_info": {
+          "package_name": "com.engvision"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815824389921-2h11vcctv3fft2tl0ipmrgjqo9ccta0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.engvision",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "815824389921-72rq5rf7gfipbrhelq2i61pdqsmae9ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAri3n7JJRHV7NK-Cezy7sbwaWdWj2EOMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815824389921-72rq5rf7gfipbrhelq2i61pdqsmae9ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

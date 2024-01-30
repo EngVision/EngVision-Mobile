@@ -1,7 +1,10 @@
+import { CheckIcon } from '@gluestack-ui/themed';
 import {
 	Button,
 	ButtonText,
 	Checkbox,
+	CheckboxIcon,
+	CheckboxIndicator,
 	CheckboxLabel,
 	Image,
 	Input,
@@ -16,14 +19,47 @@ import {
 } from '@gluestack-ui/themed';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { signup } from '../../services/auth';
 
 interface SignupProps {
 	navigation: any;
 }
 
 const Signup = ({ navigation }: SignupProps) => {
+	const [formValues, _setFormValues] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		gender: '',
+		password: '',
+		confirmPassword: '',
+		role: 'Student',
+	});
+	const [isChecked, setIsChecked] = useState(false);
+
+	const setFormValues = (value: any) =>
+		_setFormValues(prev => ({ ...prev, ...value }));
+
+	const { mutate } = useMutation({
+		mutationFn: signup,
+		onSuccess: () => {
+			navigation.navigate('Home');
+		},
+		onError: error => {
+			console.log('ERROR: ', JSON.stringify(error));
+		},
+	});
+
+	const handleSignup = () => {
+		if (!isChecked) return;
+
+		mutate(formValues);
+		console.log('formValues: ', formValues);
+	};
+
 	async function onGoogleButtonPress() {
 		// Check if your device supports Google Play
 		await GoogleSignin.hasPlayServices({
@@ -98,7 +134,10 @@ const Signup = ({ navigation }: SignupProps) => {
 						isInvalid={false}
 						isReadOnly={false}
 					>
-						<InputField placeholder="Enter your first name" />
+						<InputField
+							placeholder="Enter your first name"
+							onChangeText={value => setFormValues({ firstName: value })}
+						/>
 					</Input>
 				</View>
 
@@ -124,7 +163,10 @@ const Signup = ({ navigation }: SignupProps) => {
 						isInvalid={false}
 						isReadOnly={false}
 					>
-						<InputField placeholder="Enter your last name" />
+						<InputField
+							placeholder="Enter your last name"
+							onChangeText={value => setFormValues({ lastName: value })}
+						/>
 					</Input>
 				</View>
 			</View>
@@ -150,7 +192,10 @@ const Signup = ({ navigation }: SignupProps) => {
 					isInvalid={false}
 					isReadOnly={false}
 				>
-					<InputField placeholder="Enter your email" />
+					<InputField
+						placeholder="Enter your email"
+						onChangeText={value => setFormValues({ email: value })}
+					/>
 				</Input>
 			</View>
 
@@ -168,16 +213,16 @@ const Signup = ({ navigation }: SignupProps) => {
 					Gender
 				</Text>
 
-				<Select>
+				<Select onValueChange={value => setFormValues({ gender: value })}>
 					<SelectTrigger variant="outline" size="md">
 						<SelectInput placeholder="Select option" />
 					</SelectTrigger>
 					<SelectPortal>
 						<SelectBackdrop />
 						<SelectContent>
-							<SelectItem label="Male" value="male" />
-							<SelectItem label="Female" value="female" />
-							<SelectItem label="Other" value="other" />
+							<SelectItem label="Male" value="Male" />
+							<SelectItem label="Female" value="Female" />
+							<SelectItem label="Other" value="Other" />
 						</SelectContent>
 					</SelectPortal>
 				</Select>
@@ -204,7 +249,11 @@ const Signup = ({ navigation }: SignupProps) => {
 					isInvalid={false}
 					isReadOnly={false}
 				>
-					<InputField placeholder="Enter your password" type="password" />
+					<InputField
+						placeholder="Enter your password"
+						type="password"
+						onChangeText={value => setFormValues({ password: value })}
+					/>
 				</Input>
 			</View>
 
@@ -229,7 +278,11 @@ const Signup = ({ navigation }: SignupProps) => {
 					isInvalid={false}
 					isReadOnly={false}
 				>
-					<InputField placeholder="Enter your password" type="password" />
+					<InputField
+						placeholder="Enter your password"
+						type="password"
+						onChangeText={value => setFormValues({ confirmPassword: value })}
+					/>
 				</Input>
 			</View>
 
@@ -238,10 +291,17 @@ const Signup = ({ navigation }: SignupProps) => {
 					marginBottom: 16,
 				}}
 			>
-				<Checkbox size="md" isInvalid={false} isDisabled={false}>
-					{/* <CheckboxIndicator mr="$2">
-            <CheckboxIcon as={CheckIcon} />
-          </CheckboxIndicator> */}
+				<Checkbox
+					size="md"
+					isInvalid={false}
+					isDisabled={false}
+					value={isChecked}
+					onChange={value => setIsChecked(value)}
+					aria-label="confirm"
+				>
+					<CheckboxIndicator mr="$2">
+						<CheckboxIcon as={CheckIcon} />
+					</CheckboxIndicator>
 					<CheckboxLabel>I accept Terms and Services</CheckboxLabel>
 				</Checkbox>
 			</View>
@@ -261,6 +321,7 @@ const Signup = ({ navigation }: SignupProps) => {
 					style={{
 						borderRadius: 50,
 					}}
+					onPress={handleSignup}
 				>
 					<ButtonText>Signup</ButtonText>
 				</Button>
@@ -303,7 +364,7 @@ const Signup = ({ navigation }: SignupProps) => {
 				>
 					<Image
 						size="md"
-						borderRadius="$none"
+						borderRadius={0}
 						source={{
 							uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
 						}}
@@ -334,7 +395,7 @@ const Signup = ({ navigation }: SignupProps) => {
 				>
 					<Image
 						size="md"
-						borderRadius="$none"
+						borderRadius={0}
 						source={{
 							uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
 						}}

@@ -1,11 +1,10 @@
 import axios from 'axios';
+import { API_URL } from '../utils/constants';
 
-const API_URL = `${process.env.API_URL ? process.env.API_URL : ''}/`;
-
-const instance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-type': 'application/json',
-  },
-  withCredentials: true,
+export const instance = axios.create({
+	baseURL: API_URL,
+	headers: {
+		'Content-type': 'application/json',
+	},
+	withCredentials: true,
 });

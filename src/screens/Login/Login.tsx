@@ -14,12 +14,15 @@ import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import auth from '@react-native-firebase/auth';
 import { login } from '../../services/auth';
+import { useStore } from '../../store';
 
 interface LoginProps {
 	navigation: any;
 }
 
 const Login = ({ navigation }: LoginProps) => {
+	const setUser = useStore(state => state.setUser);
+
 	const { mutate } = useMutation({
 		mutationFn: login,
 	});
@@ -34,7 +37,8 @@ const Login = ({ navigation }: LoginProps) => {
 
 	const handleLogin = async () => {
 		mutate(formValues, {
-			onSuccess: () => {
+			onSuccess: data => {
+				setUser(data.data.data);
 				navigation.navigate('Home');
 			},
 		});

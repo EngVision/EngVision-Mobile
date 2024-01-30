@@ -23,6 +23,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { signup } from '../../services/auth';
+import { useStore } from '../../store';
 
 interface SignupProps {
 	navigation: any;
@@ -40,16 +41,16 @@ const Signup = ({ navigation }: SignupProps) => {
 	});
 	const [isChecked, setIsChecked] = useState(false);
 
+	const setUser = useStore(state => state.setUser);
+
 	const setFormValues = (value: any) =>
 		_setFormValues(prev => ({ ...prev, ...value }));
 
 	const { mutate } = useMutation({
 		mutationFn: signup,
-		onSuccess: () => {
+		onSuccess: data => {
+			setUser(data.data.data);
 			navigation.navigate('Home');
-		},
-		onError: error => {
-			console.log('ERROR: ', JSON.stringify(error));
 		},
 	});
 

@@ -16,7 +16,11 @@ import { BookOpen, MoveRight } from 'lucide-react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ApplicationScreenProps } from '../../../types/navigation';
+import { useStore } from '../../store';
 export const Home = ({ navigation }: ApplicationScreenProps) => {
+	const user = useStore(state => state.user);
+	console.log('🚀 ~ Home ~ user:', user);
+
 	return (
 		<SafeAreaView>
 			<ScrollView p={20} backgroundColor="#FFFCF7">

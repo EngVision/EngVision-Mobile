@@ -13,23 +13,18 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import auth from '@react-native-firebase/auth';
+import { login } from '../../services/auth';
+import { useStore } from '../../store';
 
 interface LoginProps {
 	navigation: any;
 }
 
 const Login = ({ navigation }: LoginProps) => {
+	const setUser = useStore(state => state.setUser);
+
 	const { mutate } = useMutation({
-		// mutationFn: body => login(body),
-		mutationFn: body => async () => {
-			console.log('BODY: ', body);
-		},
-		onSuccess: data => {
-			console.log('SUCCESS: ', data);
-		},
-		onError: error => {
-			console.log('ERROR: ', error);
-		},
+		mutationFn: login,
 	});
 
 	const [formValues, _setFormValues] = useState({
@@ -37,14 +32,13 @@ const Login = ({ navigation }: LoginProps) => {
 		password: '',
 	});
 
-	const setFormValues = value =>
+	const setFormValues = (value: any) =>
 		_setFormValues(prev => ({ ...prev, ...value }));
 
 	const handleLogin = async () => {
-		console.log('formValues: ', formValues);
-
 		mutate(formValues, {
-			onSuccess: () => {
+			onSuccess: data => {
+				setUser(data.data.data);
 				navigation.navigate('Home');
 			},
 		});
@@ -248,7 +242,7 @@ const Login = ({ navigation }: LoginProps) => {
 				>
 					<Image
 						size="md"
-						borderRadius="$none"
+						borderRadius={0}
 						source={{
 							uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
 						}}
@@ -280,7 +274,7 @@ const Login = ({ navigation }: LoginProps) => {
 				>
 					<Image
 						size="md"
-						borderRadius="$none"
+						borderRadius={0}
 						source={{
 							uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
 						}}

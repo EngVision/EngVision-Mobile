@@ -23,7 +23,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { signup } from '../../services/auth';
-import { useStore } from '../../store';
+import { useStore } from '../../zustand/store';
 
 interface SignupProps {
 	navigation: any;

@@ -41,6 +41,11 @@ const AppBottomTab = () => {
 				component={Screens.Settings}
 				options={{ tabBarIcon: () => <Settings color={'blue'} /> }}
 			/>
+			<Tab.Screen
+				name="SelectLanguage"
+				component={Screens.SelectLanguage}
+				options={{ tabBarIcon: () => <LayoutGrid color={'blue'} /> }}
+			/>
 		</Tab.Navigator>
 	);
 };

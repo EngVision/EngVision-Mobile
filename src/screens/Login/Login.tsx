@@ -14,7 +14,7 @@ import { SafeAreaView, TouchableOpacity } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import auth from '@react-native-firebase/auth';
 import { login } from '../../services/auth';
-import { useStore } from '../../store';
+import { useStore } from '../../zustand/store';
 
 interface LoginProps {
 	navigation: any;

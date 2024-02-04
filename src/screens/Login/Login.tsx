@@ -112,6 +112,9 @@ const Login = ({ navigation }: LoginProps) => {
 		<SafeAreaView
 			style={{
 				paddingHorizontal: 16,
+				flex: 1,
+				display: 'flex',
+				justifyContent: 'center',
 			}}
 		>
 			<Text

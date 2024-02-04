@@ -6,6 +6,8 @@ export type ApplicationStackParamList = {
 	Login: undefined;
 	Signup: undefined;
 	SelectLanguage: undefined;
+	GetStarted: undefined;
+	Start: undefined;
 };
 
 export type ApplicationScreenProps =

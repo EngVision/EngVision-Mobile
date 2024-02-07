@@ -5,13 +5,13 @@ import {
 	Button,
 	ButtonText,
 	HStack,
+	Icon,
 	Image,
 	Progress,
 	ProgressFilledTrack,
 	ScrollView,
 	Text,
 	VStack,
-	Icon,
 } from '@gluestack-ui/themed';
 import { BookOpen, MoveRight } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

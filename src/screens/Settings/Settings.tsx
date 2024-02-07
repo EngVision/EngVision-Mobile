@@ -1,141 +1,299 @@
 import {
-	Button,
-	ButtonText,
-	EditIcon,
-	Icon,
 	Image,
-	PhoneIcon,
 	Text,
 	View,
+	ChevronRightIcon,
+	Switch,
+	Icon,
 } from '@gluestack-ui/themed';
-import * as React from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { useStore } from '../../zustand/store';
+import { StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 
 interface SettingsProps {
 	navigation: any;
 }
 
 const Settings = ({ navigation }: SettingsProps) => {
+	const user: any = useStore(state => state.user);
+	const darkMode = useStore(state => state.darkMode);
+	const setDarkMode = useStore(state => state.setDarkMode);
+
 	return (
 		<SafeAreaView>
 			<View
 				style={{
-					paddingHorizontal: 16,
+					paddingHorizontal: 24,
+					paddingVertical: 8,
+					backgroundColor: darkMode ? '#111827' : '#fff',
+					minHeight: '100%',
 				}}
 			>
 				<View
 					style={{
 						display: 'flex',
-						justifyContent: 'center',
+						flexDirection: 'row',
 						alignItems: 'center',
 						width: '100%',
 						marginTop: 20,
+						gap: 12,
 					}}
 				>
 					<Image
-						size="xl"
+						size="xs"
 						borderRadius={410}
 						source={{
-							uri: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+							uri: `http://localhost:5000/files/${user.avatar}`,
 						}}
 						alt="Profile"
 					/>
+
+					<Text
+						style={{
+							fontWeight: '700',
+							fontSize: 20,
+							color: darkMode ? '#fff' : '#000',
+						}}
+					>
+						{user.firstName} {user.lastName}
+					</Text>
 				</View>
 
 				<View
 					style={{
-						display: 'flex',
-						alignItems: 'center',
-						marginTop: 16,
+						marginVertical: 16,
+						borderBottomColor: '#ddd',
+						borderBottomWidth: 1,
+					}}
+				/>
+
+				<View
+					style={{
+						paddingVertical: 8,
 					}}
 				>
 					<Text
 						style={{
-							fontWeight: '700',
-							fontSize: 24,
+							fontSize: 18,
+							fontWeight: '500',
+							color: darkMode ? '#fff' : '#999',
+							paddingBottom: 8,
 						}}
 					>
-						Kiet Le
+						Account settings
 					</Text>
 
-					<Text>le tan kiet</Text>
+					<TouchableOpacity
+						style={{
+							paddingVertical: 10,
+						}}
+						onPress={() => navigation.navigate('Profile')}
+					>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Edit profile
+							</Text>
+
+							<Icon
+								as={ChevronRightIcon}
+								m="$2"
+								w="$4"
+								h="$4"
+								color={darkMode ? '#fff' : '#000'}
+							/>
+						</View>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						style={{
+							paddingVertical: 10,
+						}}
+						onPress={() => navigation.navigate('ChangePassword')}
+					>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Change password
+							</Text>
+
+							<Icon
+								as={ChevronRightIcon}
+								m="$2"
+								w="$4"
+								h="$4"
+								color={darkMode ? '#fff' : '#000'}
+							/>
+						</View>
+					</TouchableOpacity>
+
+					<View
+						style={{
+							paddingVertical: 10,
+						}}
+					>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Dark mode
+							</Text>
+
+							<Switch
+								size="md"
+								isDisabled={false}
+								onValueChange={value => setDarkMode(value)}
+							/>
+						</View>
+					</View>
+
+					<TouchableOpacity
+						style={{
+							paddingVertical: 10,
+						}}
+						onPress={() => navigation.navigate('Login')}
+					>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: 'red',
+								}}
+							>
+								Logout
+							</Text>
+						</View>
+					</TouchableOpacity>
 				</View>
 
 				<View
 					style={{
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
+						marginVertical: 16,
+						borderBottomColor: '#ddd',
+						borderBottomWidth: 1,
+					}}
+				/>
+
+				<View
+					style={{
+						paddingVertical: 8,
 					}}
 				>
-					<Text>Personal information</Text>
-
-					<View
+					<Text
 						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							alignItems: 'center',
+							fontSize: 18,
+							fontWeight: '500',
+							paddingBottom: 8,
+							color: darkMode ? '#fff' : '#999',
 						}}
 					>
-						<Text
-							style={{
-								color: '#2769e7',
-							}}
-						>
-							Edit
-						</Text>
-						<Icon as={EditIcon} m="$2" w="$4" h="$4" color="#2769e7" />
-					</View>
-				</View>
+						More
+					</Text>
 
-				<View>
-					<View
+					<TouchableOpacity
 						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-between',
+							paddingVertical: 10,
 						}}
+						onPress={() => navigation.navigate('PrivacyPolicy')}
 					>
 						<View
 							style={{
 								display: 'flex',
 								flexDirection: 'row',
 								alignItems: 'center',
+								justifyContent: 'space-between',
 							}}
 						>
-							<Icon as={PhoneIcon} m="$2" w="$4" h="$4" />
-							<Text>Email</Text>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Privacy policy
+							</Text>
+
+							<Icon
+								as={ChevronRightIcon}
+								m="$2"
+								w="$4"
+								h="$4"
+								color={darkMode ? '#fff' : '#000'}
+							/>
 						</View>
+					</TouchableOpacity>
 
-						<Text>letankietpdcd@gmail.com</Text>
-					</View>
-
-					<View
+					<TouchableOpacity
 						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-between',
+							paddingVertical: 10,
 						}}
+						onPress={() => navigation.navigate('TermAndCondition')}
 					>
 						<View
 							style={{
 								display: 'flex',
 								flexDirection: 'row',
 								alignItems: 'center',
+								justifyContent: 'space-between',
 							}}
 						>
-							<Icon as={PhoneIcon} m="$2" w="$4" h="$4" />
-							<Text>Phone</Text>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Term and conditions
+							</Text>
+
+							<Icon
+								as={ChevronRightIcon}
+								m="$2"
+								w="$4"
+								h="$4"
+								color={darkMode ? '#fff' : '#000'}
+							/>
 						</View>
-
-						<Text>123456789</Text>
-					</View>
+					</TouchableOpacity>
 				</View>
-
-				<Button onPress={() => navigation.navigate('Login')}>
-					<ButtonText>Logout</ButtonText>
-				</Button>
 			</View>
 		</SafeAreaView>
 	);

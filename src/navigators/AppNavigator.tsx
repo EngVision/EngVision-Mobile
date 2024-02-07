@@ -10,34 +10,23 @@ const Stack = createStackNavigator<ApplicationStackParamList>();
 
 const Tab = createBottomTabNavigator<ApplicationStackParamList>();
 
-const AppBottomTab = () => {
+const HomeScreen = () => {
 	return (
-		<Tab.Navigator screenOptions={{ headerShown: false }}>
-			<Tab.Screen
-				name="Login"
-				component={Screens.Login}
-				options={{
-					tabBarIcon: () => <LayoutGrid color={'blue'} />,
-				}}
-			/>
-			<Tab.Screen
-				name="Signup"
-				component={Screens.Signup}
-				options={{
-					tabBarIcon: () => <LayoutGrid color={'blue'} />,
-				}}
-			/>
+		<Tab.Navigator
+			initialRouteName="Home"
+			screenOptions={{ headerShown: false }}
+		>
 			<Tab.Screen
 				name="Home"
 				component={Screens.Home}
 				options={{
-					tabBarIcon: () => <LayoutGrid color={'blue'} />,
+					tabBarIcon: () => <LayoutGrid color="#2769E7" />,
 				}}
 			/>
 			<Tab.Screen
 				name="Settings"
 				component={Screens.Settings}
-				options={{ tabBarIcon: () => <Settings color={'blue'} /> }}
+				options={{ tabBarIcon: () => <Settings color="#2769E7" /> }}
 			/>
 			<Tab.Screen
 				name="SelectLanguage"
@@ -51,7 +40,7 @@ const AppBottomTab = () => {
 export const AppNavigator = () => {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen
 					name="Start"
 					component={Screens.Start}
@@ -62,15 +51,19 @@ export const AppNavigator = () => {
 					component={Screens.GetStarted}
 					options={{ headerShown: false }}
 				/>
+				<Stack.Screen name="Login" component={Screens.Login} />
+				<Stack.Screen name="Signup" component={Screens.Signup} />
+				<Stack.Screen name="HomeScreen" component={HomeScreen} />
+				<Stack.Screen name="Profile" component={Screens.Profile} />
 				<Stack.Screen
-					name="Login"
-					component={Screens.Login}
-					options={{ headerShown: false }}
+					name="ChangePassword"
+					component={Screens.ChangePassword}
 				/>
+				<Stack.Screen name="AboutUs" component={Screens.AboutUs} />
+				<Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicy} />
 				<Stack.Screen
-					name="Home"
-					component={AppBottomTab}
-					options={{ headerShown: false }}
+					name="TermAndCondition"
+					component={Screens.TermAndCondition}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { signup } from '../../services/auth';
 import { useStore } from '../../zustand/store';
+import { CommonActions } from '@react-navigation/native';
 
 interface SignupProps {
 	navigation: any;
@@ -46,19 +47,23 @@ const Signup = ({ navigation }: SignupProps) => {
 	const setFormValues = (value: any) =>
 		_setFormValues(prev => ({ ...prev, ...value }));
 
+	const resetAction = CommonActions.reset({
+		index: 0,
+		routes: [{ name: 'Signup' }],
+	});
+
 	const { mutate } = useMutation({
 		mutationFn: signup,
 		onSuccess: data => {
+			navigation.dispatch(resetAction);
 			setUser(data.data.data);
-			navigation.navigate('Home');
+			navigation.navigate('HomeScreen');
 		},
 	});
 
 	const handleSignup = () => {
 		if (!isChecked) return;
-
 		mutate(formValues);
-		console.log('formValues: ', formValues);
 	};
 
 	async function onGoogleButtonPress() {
@@ -68,14 +73,9 @@ const Signup = ({ navigation }: SignupProps) => {
 		});
 		// Get the users ID token
 		const { idToken } = await GoogleSignin.signIn();
-		console.log('🚀 ~ onGoogleButtonPress ~ idToken:', idToken);
 
 		// Create a Google credential with the token
 		const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-		console.log(
-			'🚀 ~ onGoogleButtonPress ~ googleCredential:',
-			googleCredential,
-		);
 
 		// Sign-in the user with the credential
 		return auth().signInWithCredential(googleCredential);

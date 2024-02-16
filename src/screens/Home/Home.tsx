@@ -16,14 +16,9 @@ import {
 import { BookOpen, MoveRight } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ApplicationScreenProps } from '../../../types/navigation';
-import { useLanguageStore, useStore } from '../../zustand/store';
-
 import { StreakIcon } from '../../../assets/icons/StreakIcon';
+
 export const Home = ({ navigation }: ApplicationScreenProps) => {
-	const user = useStore(state => state.user);
-	console.log('🚀 ~ Home ~ user:', user);
-	const language = useLanguageStore(state => state.language);
-	console.log('🚀 ~ Home ~ language:', language);
 	return (
 		<SafeAreaView>
 			<ScrollView p={20} backgroundColor="#FFFCF7">

@@ -5,3 +5,8 @@ export { default as Signup } from './Signup/Signup';
 export { default as SelectLanguage } from './SelectLanguage/SelectLanguage';
 export * from './Start/Start';
 export * from './GetStarted/GetStarted';
+export { default as Profile } from './Profile/Profile';
+export { default as ChangePassword } from './ChangePassword/ChangePassword';
+export { default as AboutUs } from './AboutUs/AboutUs';
+export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
+export { default as TermAndCondition } from './TermAndCondition/TermAndCondition';

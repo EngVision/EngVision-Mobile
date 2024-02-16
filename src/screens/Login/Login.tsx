@@ -1,5 +1,4 @@
 import {
-	Button,
 	ButtonText,
 	Image,
 	Input,
@@ -15,6 +14,8 @@ import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import auth from '@react-native-firebase/auth';
 import { login } from '../../services/auth';
 import { useStore } from '../../zustand/store';
+import { CommonActions } from '@react-navigation/native';
+import LoadingButton from '../../components/common/LoadingButton';
 
 interface LoginProps {
 	navigation: any;
@@ -23,7 +24,7 @@ interface LoginProps {
 const Login = ({ navigation }: LoginProps) => {
 	const setUser = useStore(state => state.setUser);
 
-	const { mutate } = useMutation({
+	const { isPending, mutate } = useMutation({
 		mutationFn: login,
 	});
 
@@ -35,54 +36,49 @@ const Login = ({ navigation }: LoginProps) => {
 	const setFormValues = (value: any) =>
 		_setFormValues(prev => ({ ...prev, ...value }));
 
+	const resetAction = CommonActions.reset({
+		index: 0,
+		routes: [{ name: 'Login' }],
+	});
+
 	const handleLogin = async () => {
 		mutate(formValues, {
 			onSuccess: data => {
+				navigation.dispatch(resetAction);
 				setUser(data.data.data);
-				navigation.navigate('Home');
+				navigation.navigate('HomeScreen');
 			},
 		});
 	};
 
 	async function onGoogleButtonPress() {
-		console.log('PRESS LOGIN');
 		// Check if your device supports Google Play
 		await GoogleSignin.hasPlayServices({
 			showPlayServicesUpdateDialog: true,
 		});
 		// Get the users ID token
-		console.log('GET ID');
 		const { idToken } = await GoogleSignin.signIn();
-		console.log('🚀 ~ onGoogleButtonPress ~ idToken:', idToken);
 
 		// Create a Google credential with the token
 		const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-		console.log(
-			'🚀 ~ onGoogleButtonPress ~ googleCredential:',
-			googleCredential,
-		);
 
 		// Sign-in the user with the credential
 		return auth().signInWithCredential(googleCredential);
 	}
 
 	async function onFacebookButtonPress() {
-		console.log('LOGIN WITH FACEBOOK');
 		// Attempt login with permissions
 		const result = await LoginManager.logInWithPermissions([
 			'public_profile',
 			'email',
 		]);
-		console.log('🚀 ~ onFacebookButtonPress ~ result:', result);
 
 		if (result.isCancelled) {
 			throw 'User cancelled the login process';
 		}
 
-		console.log('GET DATA');
 		// Once signed in, get the users AccessToken
 		const data = await AccessToken.getCurrentAccessToken();
-		console.log('🚀 ~ onFacebookButtonPress ~ data:', data);
 
 		if (!data) {
 			throw 'Something went wrong obtaining access token';
@@ -91,10 +87,6 @@ const Login = ({ navigation }: LoginProps) => {
 		// Create a Firebase credential with the AccessToken
 		const facebookCredential = auth.FacebookAuthProvider.credential(
 			data.accessToken,
-		);
-		console.log(
-			'🚀 ~ onFacebookButtonPress ~ facebookCredential:',
-			facebookCredential,
 		);
 
 		// Sign-in the user with the credential
@@ -192,7 +184,7 @@ const Login = ({ navigation }: LoginProps) => {
 					marginBottom: 16,
 				}}
 			>
-				<Button
+				<LoadingButton
 					size="md"
 					variant="solid"
 					action="primary"
@@ -202,9 +194,10 @@ const Login = ({ navigation }: LoginProps) => {
 						borderRadius: 50,
 					}}
 					onPress={handleLogin}
+					isLoading={isPending}
 				>
 					<ButtonText>Login</ButtonText>
-				</Button>
+				</LoadingButton>
 			</View>
 
 			<Text
@@ -238,8 +231,7 @@ const Login = ({ navigation }: LoginProps) => {
 					}}
 					onPress={() =>
 						onGoogleButtonPress().then(data => {
-							console.log('Signed in with Google!', data);
-							navigation.navigate('Home');
+							navigation.navigate('HomeScreen');
 						})
 					}
 				>
@@ -270,8 +262,7 @@ const Login = ({ navigation }: LoginProps) => {
 					}}
 					onPress={() =>
 						onFacebookButtonPress().then(data => {
-							console.log('Signed in with Facebook!', data);
-							navigation.navigate('Home');
+							navigation.navigate('HomeScreen');
 						})
 					}
 				>

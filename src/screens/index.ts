@@ -10,3 +10,6 @@ export { default as ChangePassword } from './ChangePassword/ChangePassword';
 export { default as AboutUs } from './AboutUs/AboutUs';
 export { default as PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy';
 export { default as TermAndCondition } from './TermAndCondition/TermAndCondition';
+export { default as MyHub } from './MyHub/MyHub';
+export { default as Discover } from './Discover/Discover';
+export { default as Achievement } from './Achievement/Achievement';

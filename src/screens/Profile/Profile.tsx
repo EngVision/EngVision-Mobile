@@ -26,6 +26,7 @@ interface ProfileProps {
 
 const Profile = ({ navigation }: ProfileProps) => {
 	const user: any = useStore(state => state.user);
+	const setUser = useStore(state => state.setUser);
 
 	const [formValues, _setFormValues] = useState({
 		firstName: user.firstName,
@@ -39,6 +40,9 @@ const Profile = ({ navigation }: ProfileProps) => {
 
 	const { isPending, mutate } = useMutation({
 		mutationFn: updateProfile,
+		onSuccess: data => {
+			setUser(data.data.data);
+		},
 	});
 
 	const handleUpdateProfile = () => {

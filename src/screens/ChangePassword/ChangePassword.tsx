@@ -10,12 +10,15 @@ import {
 } from '@gluestack-ui/themed';
 import { useMutation } from '@tanstack/react-query';
 import { changePassword } from '../../services/account';
+import { useStore } from '../../zustand/store';
 
 interface ChangePasswordProps {
 	navigation: any;
 }
 
 const ChangePassword = ({ navigation }: ChangePasswordProps) => {
+	const setUser = useStore(state => state.setUser);
+
 	const [formValues, _setFormValues] = useState({
 		oldPassword: '',
 		newPassword: '',
@@ -27,6 +30,9 @@ const ChangePassword = ({ navigation }: ChangePasswordProps) => {
 
 	const { mutate } = useMutation({
 		mutationFn: changePassword,
+		onSuccess: data => {
+			setUser(data.data.data);
+		},
 	});
 
 	const handleChangePassword = () => {

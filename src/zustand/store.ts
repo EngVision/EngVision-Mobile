@@ -7,6 +7,8 @@ interface LanguageState {
 const store = (set: any) => ({
 	user: null,
 	setUser: (user: any) => set({ user }),
+	darkMode: false,
+	setDarkMode: (darkMode: any) => set({ darkMode }),
 });
 
 export const useStore = create(store);

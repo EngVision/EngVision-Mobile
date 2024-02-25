@@ -148,6 +148,39 @@ const Settings = ({ navigation }: SettingsProps) => {
 						</View>
 					</TouchableOpacity>
 
+					<TouchableOpacity
+						style={{
+							paddingVertical: 10,
+						}}
+						onPress={() => navigation.navigate('SelectLanguage')}
+					>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Text
+								style={{
+									fontWeight: '500',
+									color: darkMode ? '#fff' : '#000',
+								}}
+							>
+								Language
+							</Text>
+
+							<Icon
+								as={ChevronRightIcon}
+								m="$2"
+								w="$4"
+								h="$4"
+								color={darkMode ? '#fff' : '#000'}
+							/>
+						</View>
+					</TouchableOpacity>
+
 					<View
 						style={{
 							paddingVertical: 10,

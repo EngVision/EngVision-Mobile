@@ -14,6 +14,9 @@ export type ApplicationStackParamList = {
 	AboutUs: undefined;
 	PrivacyPolicy: undefined;
 	TermAndCondition: undefined;
+	MyHub: undefined;
+	Discover: undefined;
+	Achievement: undefined;
 };
 
 export type ApplicationScreenProps =

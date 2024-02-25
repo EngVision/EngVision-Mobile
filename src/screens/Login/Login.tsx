@@ -24,7 +24,7 @@ interface LoginProps {
 const Login = ({ navigation }: LoginProps) => {
 	const setUser = useStore(state => state.setUser);
 
-	const { isPending, mutate } = useMutation({
+	const { isPending, mutate, isError } = useMutation({
 		mutationFn: login,
 	});
 
@@ -176,6 +176,18 @@ const Login = ({ navigation }: LoginProps) => {
 						type="password"
 					/>
 				</Input>
+			</View>
+
+			<View>
+				{isError && (
+					<Text
+						style={{
+							color: 'red',
+						}}
+					>
+						Email or password is incorrect
+					</Text>
+				)}
 			</View>
 
 			<View

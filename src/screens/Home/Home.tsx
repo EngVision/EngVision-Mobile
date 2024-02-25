@@ -12,6 +12,7 @@ import {
 	ScrollView,
 	Text,
 	VStack,
+	View,
 } from '@gluestack-ui/themed';
 import { BookOpen, MoveRight } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

@@ -95,10 +95,8 @@ const TeacherHomeScreen = () => {
 export const AppNavigator = () => {
 	const user: any = useStore(state => state.user);
 
-	let HomeScreen: any;
-	if (user?.role === Role.Student) {
-		HomeScreen = StudentHomeScreen;
-	} else if (user?.role === Role.Teacher) {
+	let HomeScreen = StudentHomeScreen;
+	if (user?.role === Role.Teacher) {
 		HomeScreen = TeacherHomeScreen;
 	}
 

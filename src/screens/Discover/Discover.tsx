@@ -1,12 +1,22 @@
-import { Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import WebView from 'react-native-webview';
+import { ApplicationScreenProps } from '../../../types/navigation';
 import { storage } from '../../App';
 
-interface DiscoverProps {}
-
-const Discover = (props: DiscoverProps) => {
+const Discover = ({ navigation, route }: ApplicationScreenProps) => {
 	const cookies = storage.getString('cookies');
-
+	const courseId = route.params?.courseId;
+	const [initialUri, setInitialUri] = useState(
+		'http://localhost:3000/m/discover',
+	);
+	useEffect(() => {
+		if (courseId) {
+			setInitialUri(`http://localhost:3000/m/discover/${courseId}`);
+		} else {
+			setInitialUri('http://localhost:3000/m/discover');
+		}
+	}, [courseId]);
 	return (
 		<View
 			style={{
@@ -17,7 +27,7 @@ const Discover = (props: DiscoverProps) => {
 			<WebView
 				originWhitelist={['*']}
 				source={{
-					uri: 'http://localhost:3000/m/discover',
+					uri: initialUri,
 				}}
 				injectedJavaScriptBeforeContentLoaded={`document.cookie='${cookies}';`}
 			/>

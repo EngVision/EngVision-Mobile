@@ -13,24 +13,30 @@ import {
 } from 'lucide-react-native';
 import { useStore } from '../zustand/store';
 import { Role } from '../utils/constants';
+import { Animated } from 'react-native';
 
 const Stack = createStackNavigator<ApplicationStackParamList>();
 
 const Tab = createBottomTabNavigator<ApplicationStackParamList>();
-
 const StudentHomeScreen = () => {
 	const user: any = useStore(state => state.user);
 
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"
-			screenOptions={{ headerShown: false }}
+			screenOptions={{
+				headerShown: false,
+				tabBarActiveBackgroundColor: '#2769E7',
+				tabBarInactiveBackgroundColor: '#FFFCF7',
+				tabBarActiveTintColor: '#fff',
+				tabBarLabelPosition: 'below-icon',
+			}}
 		>
 			<Tab.Screen
 				name="Home"
 				component={Screens.Home}
 				options={{
-					tabBarIcon: () => <LayoutGrid color="#2769E7" />,
+					tabBarIcon: ({ color }) => <LayoutGrid color={color} />,
 				}}
 			/>
 
@@ -38,7 +44,8 @@ const StudentHomeScreen = () => {
 				name="MyHub"
 				component={Screens.MyHub}
 				options={{
-					tabBarIcon: () => <BookOpen color="#2769E7" />,
+					tabBarLabel: 'My Hub',
+					tabBarIcon: ({ color }) => <BookOpen color={color} />,
 					unmountOnBlur: true,
 				}}
 			/>
@@ -47,7 +54,8 @@ const StudentHomeScreen = () => {
 				name="Discover"
 				component={Screens.Discover}
 				options={{
-					tabBarIcon: () => <Globe color="#2769E7" />,
+					tabBarIcon: ({ color }) => <Globe color={color} />,
+					unmountOnBlur: true,
 				}}
 			/>
 
@@ -55,14 +63,14 @@ const StudentHomeScreen = () => {
 				name="Achievement"
 				component={Screens.Achievement}
 				options={{
-					tabBarIcon: () => <Trophy color="#2769E7" />,
+					tabBarIcon: ({ color }) => <Trophy color={color} />,
 				}}
 			/>
 
 			<Tab.Screen
 				name="Settings"
 				component={Screens.Settings}
-				options={{ tabBarIcon: () => <Settings color="#2769E7" /> }}
+				options={{ tabBarIcon: ({ color }) => <Settings color={color} /> }}
 			/>
 		</Tab.Navigator>
 	);

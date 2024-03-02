@@ -7,6 +7,7 @@ import {
 	HStack,
 	Icon,
 	Image,
+	Pressable,
 	Progress,
 	ProgressFilledTrack,
 	ScrollView,
@@ -203,20 +204,26 @@ export const Home = ({ navigation }: ApplicationScreenProps) => {
 						</HStack>
 						<VStack gap={10}>
 							{suggestedCourses?.slice(0, 5).map(course => (
-								<VStack
+								<Pressable
 									key={course.id}
-									gap={10}
-									p={10}
-									backgroundColor="#F7F4F4"
-									borderRadius={12}
+									onPress={() =>
+										navigation.navigate('Discover', { courseId: course.id })
+									}
 								>
-									<MyImage source={course.thumbnail} />
-									<VStack gap={10}>
-										<Text fontSize={16} fontWeight="bold" color="black">
-											{course.title}
-										</Text>
+									<VStack
+										gap={10}
+										p={10}
+										backgroundColor="#F7F4F4"
+										borderRadius={12}
+									>
+										<MyImage source={course.thumbnail} />
+										<VStack gap={10}>
+											<Text fontSize={16} fontWeight="bold" color="black">
+												{course.title}
+											</Text>
+										</VStack>
 									</VStack>
-								</VStack>
+								</Pressable>
 							))}
 						</VStack>
 					</Box>

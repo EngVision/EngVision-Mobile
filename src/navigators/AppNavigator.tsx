@@ -39,6 +39,7 @@ const StudentHomeScreen = () => {
 				component={Screens.MyHub}
 				options={{
 					tabBarIcon: () => <BookOpen color="#2769E7" />,
+					unmountOnBlur: true,
 				}}
 			/>
 

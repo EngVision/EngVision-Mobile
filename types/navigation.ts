@@ -14,8 +14,8 @@ export type ApplicationStackParamList = {
 	AboutUs: undefined;
 	PrivacyPolicy: undefined;
 	TermAndCondition: undefined;
-	MyHub: undefined;
-	Discover: undefined;
+	MyHub: { courseId: string } | undefined;
+	Discover: { courseId: string } | undefined;
 	Achievement: undefined;
 };
 

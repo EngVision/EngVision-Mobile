@@ -1,12 +1,21 @@
 import { Text, View } from 'react-native';
 import WebView from 'react-native-webview';
 import { storage } from '../../App';
-
-interface MyHubProps {}
-
-const MyHub = (props: MyHubProps) => {
+import { useEffect, useState } from 'react';
+import { ApplicationScreenProps } from '../../../types/navigation';
+const MyHub = ({ navigation, route }: ApplicationScreenProps) => {
 	const cookies = storage.getString('cookies');
-
+	const courseId = route.params?.courseId;
+	const [initialUri, setInitialUri] = useState(
+		'http://localhost:3000/m/my-hub',
+	);
+	useEffect(() => {
+		if (courseId) {
+			setInitialUri(`http://localhost:3000/m/my-hub/${courseId}`);
+		} else {
+			setInitialUri('http://localhost:3000/m/my-hub');
+		}
+	}, [courseId]);
 	return (
 		<View
 			style={{
@@ -16,9 +25,7 @@ const MyHub = (props: MyHubProps) => {
 		>
 			<WebView
 				originWhitelist={['*']}
-				source={{
-					uri: 'http://localhost:3000/m/my-hub',
-				}}
+				source={{ uri: initialUri }}
 				injectedJavaScriptBeforeContentLoaded={`document.cookie='${cookies}';`}
 			/>
 		</View>

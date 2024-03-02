@@ -169,6 +169,9 @@ export const Home = ({ navigation }: ApplicationScreenProps) => {
 											isDisabled={false}
 											isFocusVisible={false}
 											borderRadius={8}
+											onPress={() =>
+												navigation.navigate('MyHub', { courseId: course.id })
+											}
 										>
 											<ButtonText>Continue</ButtonText>
 										</Button>

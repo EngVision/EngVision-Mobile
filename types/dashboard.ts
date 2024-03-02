@@ -33,3 +33,46 @@ export interface IUserLevel {
 	};
 	CEFRLevel: string;
 }
+export interface SubmissionResponse {
+	id: string;
+	course: {
+		id: string;
+		title: string;
+		thumbnail: string;
+	};
+	section: {
+		id: string;
+		title: string;
+	};
+	lesson: {
+		id: string;
+		title: string;
+	};
+	exercise: {
+		id: string;
+		title: string;
+		tags: string[];
+	};
+	user: {
+		id: string;
+		firstName: string;
+		lastName: string;
+		avatar: string;
+	};
+	totalCorrect: number;
+	totalQuestion: number;
+	totalDone: number;
+	progress: number;
+	grade: number;
+	status: 'graded' | 'pending';
+	createdAt: Date;
+	updatedAt: Date;
+}
+export interface ResponseData<T = any> {
+	data: T;
+	message: string;
+	success: boolean;
+	limit?: number;
+	offset?: number;
+	total?: number;
+}

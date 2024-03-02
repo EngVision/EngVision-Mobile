@@ -28,6 +28,11 @@ import { CourseDetails } from '../../../types/courseDetails';
 import { fetchSuggestedCourses } from '../../services/dashboard';
 import { SERVER_FILES_URL } from '../../utils/constants';
 import MyImage from '../../components/common/MyImage';
+import dayjs from 'dayjs';
+import { fetchSubmissionList } from '../../services/dashboard';
+import { SubmissionResponse } from '../../../types/dashboard';
+import { ResponseData } from '../../../types/dashboard';
+import { useMemo } from 'react';
 export const Home = ({ navigation }: ApplicationScreenProps) => {
 	const user: any = useStore(state => state.user);
 	const { data: userLevel } = useQuery<IUserLevel>({
@@ -42,7 +47,66 @@ export const Home = ({ navigation }: ApplicationScreenProps) => {
 		queryKey: ['suggested-courses'],
 		queryFn: () => fetchSuggestedCourses(),
 	});
+	const { data: rawSubmissionList } = useQuery<
+		ResponseData<SubmissionResponse[]>
+	>({
+		queryKey: ['submission'],
+		queryFn: () => fetchSubmissionList(),
+	});
+	console.log(rawSubmissionList);
+	const calculateDayStreaks = () => {
+		let uniqueSubmissions = [];
+		if (rawSubmissionList?.data) {
+			const submissionSet = new Set();
+			const sortedSubmissions =
+				rawSubmissionList?.data?.sort((a, b) =>
+					dayjs(b.updatedAt).diff(dayjs(a.updatedAt)),
+				) || [];
 
+			uniqueSubmissions = sortedSubmissions.reduce(
+				(result: any[], submission: any) => {
+					const submissionDate = dayjs(submission.updatedAt).startOf('day');
+					const formattedDate = submissionDate.format('YYYY-MM-DD');
+
+					if (!submissionSet.has(formattedDate)) {
+						result.push(submission);
+						submissionSet.add(formattedDate);
+					}
+
+					return result;
+				},
+				[],
+			);
+
+			let currentStreak = 0;
+			let currentDate = dayjs();
+
+			for (const submission of uniqueSubmissions) {
+				const submissionDate = dayjs(submission.updatedAt);
+				const isConsecutiveDay =
+					currentDate
+						.startOf('day')
+						.diff(submissionDate.startOf('day'), 'day') === 1 ||
+					currentDate.isSame(submissionDate, 'day');
+
+				if (isConsecutiveDay) {
+					currentStreak++;
+				} else {
+					break;
+				}
+
+				currentDate = submissionDate;
+			}
+
+			return currentStreak;
+		}
+
+		return 0;
+	};
+	const dayStreaks = useMemo(
+		() => calculateDayStreaks(),
+		[rawSubmissionList?.data],
+	);
 	return (
 		<SafeAreaView>
 			<ScrollView p={20} backgroundColor="#FFFCF7">
@@ -85,7 +149,7 @@ export const Home = ({ navigation }: ApplicationScreenProps) => {
 							>
 								<VStack alignItems="center">
 									<Text fontSize={24} color="$primary500" fontWeight="bold">
-										30
+										{dayStreaks}
 									</Text>
 									<Text fontSize={14} color="$primary500" fontWeight="bold">
 										Day Streaks

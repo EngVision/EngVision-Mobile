@@ -86,7 +86,7 @@ const TeacherHomeScreen = () => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={Screens.Home}
+				component={Screens.TeacherHome}
 				options={{
 					tabBarIcon: () => <LayoutGrid color="#2769E7" />,
 				}}
@@ -112,16 +112,7 @@ export const AppNavigator = () => {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen
-					name="Start"
-					component={Screens.Start}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="GetStarted"
-					component={Screens.GetStarted}
-					options={{ headerShown: false }}
-				/>
+				{/* <Stack.Screen name="GetStarted" component={Screens.GetStarted} /> */}
 				<Stack.Screen name="Login" component={Screens.Login} />
 				<Stack.Screen name="Signup" component={Screens.Signup} />
 				<Stack.Screen name="HomeScreen" component={HomeScreen} />

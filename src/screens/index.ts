@@ -13,3 +13,4 @@ export { default as TermAndCondition } from './TermAndCondition/TermAndCondition
 export { default as MyHub } from './MyHub/MyHub';
 export { default as Discover } from './Discover/Discover';
 export { default as Achievement } from './Achievement/Achievement';
+export { default as TeacherHome } from './TeacherHome/TeacherHome';

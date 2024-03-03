@@ -17,6 +17,7 @@ export type ApplicationStackParamList = {
 	MyHub: { courseId: string } | undefined;
 	Discover: { courseId: string } | undefined;
 	Achievement: undefined;
+	TeacherHome: undefined;
 };
 
 export type ApplicationScreenProps =

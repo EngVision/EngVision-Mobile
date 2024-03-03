@@ -148,7 +148,7 @@ const Settings = ({ navigation }: SettingsProps) => {
 						</View>
 					</TouchableOpacity>
 
-					<TouchableOpacity
+					{/* <TouchableOpacity
 						style={{
 							paddingVertical: 10,
 						}}
@@ -209,7 +209,7 @@ const Settings = ({ navigation }: SettingsProps) => {
 								onValueChange={value => setDarkMode(value)}
 							/>
 						</View>
-					</View>
+					</View> */}
 
 					<TouchableOpacity
 						style={{

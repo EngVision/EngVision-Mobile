@@ -6,7 +6,6 @@ export default async (body: any) => {
 
 	const cookies = response.headers['set-cookie'];
 	storage.set('cookies', cookies?.[0] || '');
-	console.log(cookies);
 
 	instance.defaults.headers.Cookie = cookies as any;
 
